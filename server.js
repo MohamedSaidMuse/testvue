@@ -1,24 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
 
+// Middleware to parse JSON bodies
 app.use(bodyParser.json());
-app.use(cors());
 
-// Route to handle webhook POST requests
-app.post('/webhook', (req, res) => {
-  console.log('Webhook received:', req.body);
-  res.json({ message: 'Webhook data received', data: req.body });
+// Add any other middleware or routes you need here
+
+// Endpoint to handle Webflow webhooks
+app.post('/webflow-webhook', (req, res) => {
+  console.log('Received webhook:', req.body);
+  // Process the webhook data here
+  res.status(200).send('Webhook received');
 });
 
-// Route to handle GET requests to the root path
-app.get('/', (req, res) => {
-  res.send('Welcome to the Webhook Server');
-});
-
+// Existing server start code
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
